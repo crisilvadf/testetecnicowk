@@ -1,0 +1,52 @@
+﻿@model IEnumerable<WebApplication.Models.Categoria>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container mt-5">
+    <div class="row">
+        <h2>Lista de Categorias Ativas</h2>
+        <hr />
+        <p>
+            <button onclick="location.href='@Url.Action("Create", "Categoria")';return false;" class="btn btn-primary">Nova Categoria</button>
+        </p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.NomeCategoria)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IdCategoria)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DataCriacao)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NomeCategoria)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IdCategoria)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DataCriacao)
+                        </td>
+                        <td class="btn-group" role="group">
+                            <button onclick="location.href='@Url.Action("Details", "Categoria", new { guidId = item.IdCategoria })';return false;" class="btn btn-secondary">Detalhar</button>
+                            <button onclick="location.href='@Url.Action("Edit", "Categoria", new { guidId = item.IdCategoria })';return false;" class="btn btn-warning">Editar</button>
+                            <button onclick="location.href='@Url.Action("Delete", "Categoria", new { guidId = item.IdCategoria })';return false;" class="btn btn-danger">Deletar</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

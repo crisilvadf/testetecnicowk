@@ -1,0 +1,54 @@
+﻿@model WebApplication.Models.Request.CriarProdutoRequest
+
+@{
+    ViewData["Title"] = "Cadastrar Produto";
+}
+
+<div class="container mt-5">
+    <div class="row">
+        <h2>Cadastrar Produto</h2>
+        <hr />
+        <div class="col-md-4">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="NomeProduto" class="control-label"></label>
+                    <input asp-for="NomeProduto" class="form-control" />
+                    <span asp-validation-for="NomeProduto" class="text-danger"></span>
+                </div>
+                <hr />
+                <div class="btn-group" role="group">
+                    <button type="submit" class="btn btn-primary" id="salvarProduto">Salvar</button>
+                    <button class="btn btn-dark">Voltar</button>
+                </div>
+            </form>
+            <div class="toast position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+                <div id="salvarProduto" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="toast-header">
+                        <strong class="me-auto">Cadastro de produto</strong>
+                        <small>Agora</small>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+                    </div>
+                    <div class="toast-body">
+                        <p>O registro está sendo gravado na base de dados.</p>
+                        <p>Por favor aguarde...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById("salvarProduto").onclick = function () {
+        var toastElList = [].slice.call(document.querySelectorAll('.toast'))
+        var toastList = toastElList.map(function (toastEl) {
+            return new bootstrap.Toast(toastEl)
+        })
+        toastList.forEach(toast => toast.show())
+    }
+</script>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

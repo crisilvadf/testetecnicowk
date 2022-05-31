@@ -1,0 +1,64 @@
+﻿@model WebApplication.Models.Request.EditarCategoriaRequest
+
+@{
+    ViewData["Title"] = "Editar";
+}
+
+<div class="container mt-5">
+    <div class="row">
+        <h2>Editar Catetoria</h2>
+        <hr />
+        <div class="col-md-4">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label for="IdCategoria" asp-for="IdCategoria" class="control-label"></label>
+                    <input asp-for="IdCategoria" class="form-control" readonly />
+                    <span asp-validation-for="IdCategoria" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label for="DataCriacao" asp-for="DataCriacao" class="control-label"></label>
+                    <input asp-for="DataCriacao" class="form-control" readonly />
+                    <span asp-validation-for="DataCriacao" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label for="NomeCategoria" asp-for="NomeCategoria" class="control-label"></label>
+                    <input asp-for="NomeCategoria" class="form-control" />
+                    <span asp-validation-for="NomeCategoria" class="text-danger"></span>
+                </div>
+                <hr />
+                <div class="btn-group" role="group">
+                    <button type="submit" class="btn btn-primary" id="alterarCategoria">Salvar</button>
+                    <button class="btn btn-dark">Voltar</button>
+                </div>
+            </form>
+            <div class="toast position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+                <div id="alterarCategoria" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="toast-header">
+                        <strong class="me-auto">Edição de categoria</strong>
+                        <small>Agora</small>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+                    </div>
+                    <div class="toast-body">
+                        <p>O registro está sendo gravado na base de dados.</p>
+                        <p>Por favor aguarde...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById("alterarCategoria").onclick = function () {
+        var toastElList = [].slice.call(document.querySelectorAll('.toast'))
+        var toastList = toastElList.map(function (toastEl) {
+            return new bootstrap.Toast(toastEl)
+        })
+        toastList.forEach(toast => toast.show())
+    }
+</script>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
